@@ -1,6 +1,21 @@
+# 📝 Todo List App
+
+A full-stack Todo List application built with **React (frontend)** and **NestJS + Prisma + MySQL (backend)**.
+
+---
+
+## 🚀 Getting Started
+
+### 🧰 Clone the Repository
+
+# bash
+git clone https://github.com/sardar-ali/todo-list.git
+cd todo-list
+
+
 cd frontend
 
-# Install dependencies
+# **Install dependencies**
 npm install
 # or
 yarn
