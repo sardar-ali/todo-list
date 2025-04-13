@@ -1,19 +1,33 @@
-git clone https://github.com/sardar-ali/todo-list.git
-cd todo-list
+cd frontend
 
-Frontend setup
-  cd frontend 
-  npm install or yarn 
-  change .example.env to .env
-  
-  yarn dev 
-  browse http://localhost:3000/
+# Install dependencies
+npm install
+# or
+yarn
 
-Backend setup
-  cd backend
-  npm install or yarn 
-  docker-compose up -d 
-  docker exec -it mysql_db mysql -u root -p
-  enter password: rootpassword
-  npx prisma migrate dev --name init
-  yarn start:dev
+# Rename .env file
+mv .env.example .env
+
+# Run the development server
+yarn dev
+
+
+cd backend
+
+# Install dependencies
+npm install
+# or
+yarn
+
+# Start MySQL with Docker
+docker-compose up -d
+
+# Access MySQL shell
+docker exec -it mysql_db mysql -u root -p
+# Enter password: rootpassword
+
+# Apply Prisma migrations
+npx prisma migrate dev --name init
+
+# Start backend server
+yarn start:dev
