@@ -1,3 +1,24 @@
+***** Note ****
+
+I faced some proxy issues during the installation of dependencies, so I used some custom components as a workaround.
+
+info There appears to be trouble with your network connection. Retrying...
+info There appears to be trouble with your network connection. Retrying...
+info There appears to be trouble with your network connection. Retrying...
+info There appears to be trouble with your network connection. Retrying...
+error AggregateError [ETIMEDOUT]: 
+    at internalConnectMultiple (node:net:1139:18)
+    at internalConnectMultiple (node:net:1215:5)
+    at Timeout.internalConnectMultipleTimeout (node:net:1739:5)
+    at listOnTimeout (node:internal/timers:596:11)
+    at process.processTimers (node:internal/timers:529:7)
+info Visit https://yarnpkg.com/en/docs/cli/add for documentation about this command.
+
+
+
+
+
+
 # 📝 Todo List App
 
 A full-stack Todo List application built with **React (frontend)** and **NestJS + Prisma + MySQL (backend)**.
