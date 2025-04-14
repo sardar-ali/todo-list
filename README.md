@@ -71,6 +71,8 @@ yarn start:dev
 **browse **
 http://localhost:3000/
 
-![image](https://github.com/user-attachments/assets/b9591c16-5bda-46ef-bf3f-2c0c30f3f4ce)
-![image](https://github.com/user-attachments/assets/37fbbfe0-4afd-40d9-bdb4-2ffbc577b7e4)
+![image](https://github.com/user-attachments/assets/7b74384b-ee51-4a2f-b652-557f2638e695)
+![image](https://github.com/user-attachments/assets/0ca194ed-d3cd-46a1-a267-433f5198a614)
+
+![image](https://github.com/user-attachments/assets/75b7b1e7-d6f3-4f57-967b-b603c171ab27)
 
