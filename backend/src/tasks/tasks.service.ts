@@ -16,10 +16,17 @@ export class TasksService {
     return this.prisma.task.findMany();
   }
 
-  async deleteTask(id: number): Promise<Task> {
-    return this.prisma.task.delete({
+  async deleteTask(
+    id: number,
+  ): Promise<{ message: string; deletedTask: Task }> {
+    const deletedTask = await this.prisma.task.delete({
       where: { id },
     });
+
+    return {
+      message: 'Task deleted successfully.',
+      deletedTask,
+    };
   }
   async updateTask(
     id: number,

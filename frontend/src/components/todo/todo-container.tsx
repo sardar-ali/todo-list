@@ -100,7 +100,7 @@ function TodoContainer() {
         <GlobalModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          title="Add Task"
+          title={isEdit ? "Edit Task" : "Add Task"}
           onSubmit={handleSubmit}
           disable={!taskData.title || !taskData.description}
           content={
