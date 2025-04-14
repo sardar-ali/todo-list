@@ -1,28 +1,27 @@
 import React from "react";
 interface Props {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isOpen: boolean;
   title?: string;
   content: React.ReactNode;
   onSubmit?: () => void;
+  popupHandler: () => void;
   disable?: boolean;
 }
 const GlobalModal: React.FC<Props> = ({
-  setIsOpen,
-  isOpen,
   title = "Add Task",
   content,
+  popupHandler,
   onSubmit,
   disable = false,
 }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-4 transition-all">
-        <h2 className="text-xl font-semibold mb-4">{title}</h2>
-        <div>{content}</div>
+        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+        <hr />
+        <div className="py-4">{content}</div>
         <div className="flex justify-end gap-2">
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={popupHandler}
             className="px-4 py-2 bg-gray-300 rounded-md"
           >
             Cancel
@@ -30,7 +29,7 @@ const GlobalModal: React.FC<Props> = ({
           <button
             disabled={disable}
             onClick={() => {
-              setIsOpen(!isOpen);
+              popupHandler();
               onSubmit && onSubmit();
             }}
             className={`px-4 py-2 bg-blue-600 text-white rounded-md  ${

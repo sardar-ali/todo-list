@@ -5,6 +5,7 @@ import GlobalModal from "../global/global-modal";
 import useTodadoApis from "@/services/todo-apis";
 import React, { useEffect, useState } from "react";
 import GlobalNotFound from "../global/global-not-found";
+import GlobalAlert from "../global/global-alert";
 
 function TodoContainer() {
   const [list, setList] = useState([]);
@@ -16,6 +17,32 @@ function TodoContainer() {
     title: "",
     description: "",
   });
+
+  const [toast, setToast] = useState<{ message: string; title: string }>({
+    message: "",
+    title: "",
+  });
+
+  const resetState = () => {
+    setTaskData({
+      title: "",
+      description: "",
+    });
+    setIsEdit(false);
+  };
+
+  const showToast = (message: string, title: string) => {
+    setToast({
+      message,
+      title,
+    });
+    setTimeout(() => {
+      setToast({
+        message: "",
+        title: "",
+      });
+    }, 3000);
+  };
 
   // onEdit function to handle the edit button click
   const onEdit = (data: TaskTypes) => {
@@ -31,10 +58,7 @@ function TodoContainer() {
       const response = await getTodoList();
       setList(response);
       setIsEdit(false);
-      setTaskData({
-        title: "",
-        description: "",
-      });
+      resetState();
     } catch (error) {
       console.error("Error fetching todo list:", error);
     }
@@ -42,7 +66,8 @@ function TodoContainer() {
 
   // Function to handle the delete button click
   const onDelete = async (id: number) => {
-    await deleteTask(id);
+    const response = await deleteTask(id);
+    showToast(response.message, "Delete Task");
     fetchTodoList();
   };
 
@@ -50,7 +75,8 @@ function TodoContainer() {
   const handleSubmit = async () => {
     try {
       if (isEdit && selectedTask) {
-        await updateTask(Number(selectedTask.id), taskData);
+        const response = await updateTask(Number(selectedTask.id), taskData);
+        showToast(response.message, "Update Task");
       } else {
         await createTask(taskData);
       }
@@ -66,13 +92,17 @@ function TodoContainer() {
     }
   }, []);
 
+  const popupHandler = () => {
+    resetState();
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <div className="w-[60%] h-[60%] bg-white rounded-lg shadow-smp-4 border">
         <div className="flex justify-between rounded-t-lg bg-primary p-4">
           <h1 className="text-2xl font-bold text-white">Todo List</h1>
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={popupHandler}
             className="bg-secondary text-white py-2 px-4 rounded-md hover:bg-[secondary]/80 transition-transform duration-400 hover:scale-110"
           >
             + Add Task
@@ -98,8 +128,7 @@ function TodoContainer() {
 
       {isOpen && (
         <GlobalModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          popupHandler={popupHandler}
           title={isEdit ? "Edit Task" : "Add Task"}
           onSubmit={handleSubmit}
           disable={!taskData.title || !taskData.description}
@@ -140,6 +169,9 @@ function TodoContainer() {
             </>
           }
         />
+      )}
+      {toast.message && toast.title && (
+        <GlobalAlert message={toast.message} title={toast.title} />
       )}
     </>
   );

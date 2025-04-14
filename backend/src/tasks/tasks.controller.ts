@@ -29,10 +29,15 @@ export class TasksController {
   }
 
   @Patch(':id')
-  updateTask(
+  async updateTask(
     @Param('id') id: number,
     @Body() body: { id: number; title: string; description: string },
   ) {
-    return this.tasksService.updateTask(id, body);
+    const task = await this.tasksService.updateTask(id, body);
+    return {
+      success: true,
+      message: 'Task updated successfully',
+      data: task,
+    };
   }
 }
